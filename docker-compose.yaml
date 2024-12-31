@@ -1,0 +1,43 @@
+version: '3.8'
+
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  kibanaconfig01:
+    external: true
+
+services:
+  es01:
+    container_name: es01
+    image: elasticsearch:8.16.0
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ELASTIC_PASSWORD=elastic
+    networks:
+      - elastic
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  kibana01:
+    container_name: kibana01
+    image: kibana:8.16.0
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es01:9200
+    networks:
+      - elastic
+    volumes:
+      - kibanaconfig01:/usr/share/kibana/config
+    depends_on:
+      es01:
+        condition: service_healthy

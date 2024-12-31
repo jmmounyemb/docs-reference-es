@@ -1,0 +1,22 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: docs-reference-es
+  ai:
+    openai.api-key: <ADD Your API key here>
+    openai.chat.options.model: gpt-4
+    vectorstore:
+      elasticsearch:
+        initialize-schema: true
+        index-name: docs-reference
+        dimensions: 1536
+        similarity: cosine
+        batching-strategy: TOKEN_COUNT
+  elasticsearch:
+    uris: http://localhost:9200
+    username: elastic
+    password: elastic
+  docker:
+    compose:
+      lifecycle-management: start_only
