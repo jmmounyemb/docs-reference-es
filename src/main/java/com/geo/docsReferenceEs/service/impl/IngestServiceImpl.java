@@ -1,5 +1,6 @@
 package com.geo.docsReferenceEs.service.impl;
 
+import com.geo.docsReferenceEs.exception.IngestionDocumentException;
 import com.geo.docsReferenceEs.service.IIngestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,17 +25,21 @@ public class IngestServiceImpl implements IIngestService {
     @Override
     public void ingestDocument(String path) {
         log.info("Loading Spring Boot Reference PDF into Vector Store");
-        var config = PdfDocumentReaderConfig.builder()
+        PdfDocumentReaderConfig config = PdfDocumentReaderConfig.builder()
                 .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
                         .withNumberOfTopPagesToSkipBeforeDelete(0)
                         .build())
                 .withPagesPerDocument(1)
                 .build();
 
-        var pdfReader = new PagePdfDocumentReader(path, config);
-        var textSplitter = new TokenTextSplitter();
-        vectorStore.accept(textSplitter.apply(pdfReader.get()));
-
-        log.info("Reference PDF was successfully stored in the vector database");
+        try {
+            PagePdfDocumentReader pdfReader = new PagePdfDocumentReader(path, config);
+            TokenTextSplitter textSplitter = new TokenTextSplitter();
+            vectorStore.accept(textSplitter.apply(pdfReader.get()));
+            log.info("Reference Document was successfully stored in the vector database");
+        } catch (Exception ex) {
+            log.error("An Error occured while ingesting document.", ex);
+            throw new IngestionDocumentException("Could not ingest the document. Please contact the Administrator");
+        }
     }
 }

@@ -14,9 +14,9 @@ spring:
         similarity: cosine
         batching-strategy: TOKEN_COUNT
   elasticsearch:
-    uris: http://localhost:9200
-    username: elastic
-    password: elastic
+    uris: <ADD your url here>
+    username: <ADD username here>
+    password: <ADD password here>
   docker:
     compose:
       lifecycle-management: start_only

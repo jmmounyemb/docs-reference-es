@@ -34,6 +34,4 @@ public class FaqController {
         ingestService.ingestDocument(document.path());
         return ResponseEntity.ok().body("Success");
     }
-
-
 }
