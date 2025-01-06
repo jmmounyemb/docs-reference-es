@@ -97,12 +97,12 @@ Below is the method from that class which ingest documents.
 ```java
  @Override
 public void ingestDocument(String path) {
-    var config = PdfDocumentReaderConfig.builder()
-            .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
-                    .withNumberOfTopPagesToSkipBeforeDelete(0)
-                    .build())
-            .withPagesPerDocument(1)
-            .build();
+    PdfDocumentReaderConfig config = PdfDocumentReaderConfig.builder()
+                .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
+                .withNumberOfTopPagesToSkipBeforeDelete(0)
+                .build())
+                .withPagesPerDocument(1)
+                .build();
 
     var pdfReader = new PagePdfDocumentReader(path, config);
     var textSplitter = new TokenTextSplitter();
