@@ -5,7 +5,7 @@ technique useful to overcome the limitations of large language models that strug
 and context-awareness. This application demonstrates how to create a chatbot with RAG capabilities using Spring AI, Spring Boot 
 and Elasticsearch as Vector database. 
 
-## Project Overview
+## Overview
 
 This project demonstrates the integration of Spring AI, Spring Boot, and Elasticsearch to build a chatbot 
 capable of handling traditional request-response interactions, similar to a FAQ system, specifically for 
