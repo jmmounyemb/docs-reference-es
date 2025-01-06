@@ -27,8 +27,8 @@ public class IngestServiceImpl implements IIngestService {
         log.info("Loading Spring Boot Reference PDF into Vector Store");
         PdfDocumentReaderConfig config = PdfDocumentReaderConfig.builder()
                 .withPageExtractedTextFormatter(new ExtractedTextFormatter.Builder().withNumberOfBottomTextLinesToDelete(0)
-                        .withNumberOfTopPagesToSkipBeforeDelete(0)
-                        .build())
+                .withNumberOfTopPagesToSkipBeforeDelete(0)
+                .build())
                 .withPagesPerDocument(1)
                 .build();
 

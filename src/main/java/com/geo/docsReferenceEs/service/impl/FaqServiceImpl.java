@@ -38,7 +38,8 @@ public class FaqServiceImpl implements IFaqService {
     public String faqLLM(String question) {
         PromptTemplate promptTemplate = new PromptTemplate(sbPromptTemplate);
         String lineSeparator = System.getProperty("line.separator");
-        Prompt sbPrompt = promptTemplate.create(Map.of("input", question, "documents", String.join(lineSeparator, findSimilarDocuments(question))));
+        Prompt sbPrompt = promptTemplate.create(Map.of("input", question, "documents", String.join(lineSeparator,
+                findSimilarDocuments(question))));
         return chatClient.prompt(sbPrompt).call().content();
     }
 

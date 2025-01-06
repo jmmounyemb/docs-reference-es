@@ -11,8 +11,10 @@ import org.springframework.web.context.request.WebRequest;
 public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(IngestionDocumentException.class)
-    public ResponseEntity<ErrorResponse> handleIngestionDocumentException(IngestionDocumentException exception, WebRequest request) {
-        ErrorMessage errorMessage = new ErrorMessage(IngestionDocumentException.class.getSimpleName(), exception.getMessage());
+    public ResponseEntity<ErrorResponse> handleIngestionDocumentException(IngestionDocumentException exception,
+                                                                          WebRequest request) {
+        ErrorMessage errorMessage = new ErrorMessage(IngestionDocumentException.class.getSimpleName(),
+                exception.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(false, errorMessage);
         return ResponseEntity.internalServerError().body(errorResponse);
     }
