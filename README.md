@@ -26,12 +26,6 @@ To get started with this project, ensure you have Java 17 or newer and Maven ins
 
 1. Set up your API keys:
     - Create a file `application.yml` in the `src/main/resources` directory
-        - Add the following line, replacing `<ADD Your Weather API key here>` with your actual Weather API key:
-          ```
-          weather:
-           api-key: <ADD Your Weather API key here>
-           api-url: http://api.weatherapi.com/v1
-          ```
         - Specify Open AI API Key:
           ```
           spring:
