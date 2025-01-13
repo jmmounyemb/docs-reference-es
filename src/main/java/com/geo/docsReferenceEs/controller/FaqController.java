@@ -24,7 +24,7 @@ public class FaqController {
     }
 
     @GetMapping("")
-    public ResponseEntity<String> question(@RequestParam(defaultValue = "What is Spring Boot") String question) {
+    public ResponseEntity<String> question(@RequestParam String question) {
         return ResponseEntity.ok(faqService.faqLLM(question));
     }
 
