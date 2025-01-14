@@ -24,7 +24,7 @@ public class FaqController {
     }
 
     @GetMapping("")
-    public ResponseEntity<String> question(@RequestParam String question) {
+    public ResponseEntity<String> askQuestion(@RequestParam String question) {
         return ResponseEntity.ok(faqService.faqLLM(question));
     }
 
